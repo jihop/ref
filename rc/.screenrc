@@ -1,0 +1,19 @@
+### Settings ###
+
+vbell off
+vbell_msg "Ring"
+altscreen on
+escape ^Bb               # Use ctrl+b as esc_char
+
+### Behaviors ###
+
+autodetach on
+startup_message off      # Turn off the splash screen
+defscrollback 50000      # 50,000 lines for buffer
+
+### Right/Left Bindings ###
+
+bindkey "^[[c" next
+bindkey "^[[d" prev
+bindkey "^[[b" focus
+
