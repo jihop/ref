@@ -1,0 +1,5 @@
+
+### TEST MAPPER/REDUCER ###
+
+ $ cat input.txt | <mapper_executable> | sort | <reducer_executable> > output.txt
+
