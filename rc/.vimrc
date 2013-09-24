@@ -30,15 +30,6 @@ set smartindent
 set iskeyword+=_,$,@,%,#
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 
-" Front/End of line with H/L
-noremap H ^
-noremap L $
-vnoremap L g_
-
-" Use perl regexes while searching
-nnoremap / /\v
-vnoremap / /\v
-
 " Folding
 set foldlevelstart=99     " no folds when starting
 set foldmethod=indent
