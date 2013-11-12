@@ -104,16 +104,31 @@ function extract()      # Handy Extract Program.
 #----------------------------------------------------------------------
 # Settings
 #----------------------------------------------------------------------
-HISTSIZE=100000
-HISTFILESIZE=100000
-HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 
 export INPUTRC=~/.inputrc
 
+
+#----------------------------------------------------------------------
+# History Across Session
+#----------------------------------------------------------------------
+
+# avoid duplicates..
+export HISTCONTROL=ignoredups:erasedups           # No Duplicate History
+export HISTSIZE=100000                            # Big History Size
+export HISTFILESIZE=100000                        # Big History File
+#export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "    #
+shopt -s histappend                               # Append to History
+
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+
 #----------------------------------------------------------------------
 # Personal Alias
 #----------------------------------------------------------------------
+
+alias pjson='python -mjson.tool'
 
 alias h='history'
 alias j='jobs -l'
@@ -176,6 +191,12 @@ fi
 # Git
 #----------------------------------------------------------------------
 
+# https://github.com/trufa/git-cheatsheet
+# http://ndpsoftware.com/git-cheatsheet.html
+
 git config --global color.ui true
-git config alias.lg 'log --pretty=oneline --decorate --graph --all'
+git config alias.lg 'log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit --decorate --graph --all'
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global alias.d difftool
 
