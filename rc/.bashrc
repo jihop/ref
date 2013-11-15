@@ -61,11 +61,6 @@ function xtitle()      # Adds some text in the terminal frame.
     esac
 }
 
-# aliases that use xtitle
-alias top='xtitle Processes on $HOST && top'
-alias make='xtitle Making $(basename $PWD) ; make'
-alias ncftp="xtitle ncFTP ; ncftp"
-
 function swap()  # Swap 2 filenames around, if they exist
 {                #(from Uzi's bashrc).
     local TMPFILE=tmp.$$
@@ -101,10 +96,10 @@ function extract()      # Handy Extract Program.
      fi
 }
 
+
 #----------------------------------------------------------------------
 # Settings
 #----------------------------------------------------------------------
-
 
 export INPUTRC=~/.inputrc
 
@@ -125,47 +120,27 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 
 #----------------------------------------------------------------------
-# Personal Alias
-#----------------------------------------------------------------------
-
-alias pjson='python -mjson.tool'
-
-alias h='history'
-alias j='jobs -l'
-alias ..='cd ..'
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias now="date +\"%Y%m%d.%H%M%S\""
-alias today="date +\"%Y%m%d\""
-
-alias mkdir='mkdir -p'
-alias ls="ls --color=auto"
-alias grep="egrep --color=auto"
-
-
-#----------------------------------------------------------------------
 # Command Editors
 #----------------------------------------------------------------------
 
-# set -o emacs
+set -o emacs # uncomment this for emacs mode
 #
 # ctrl-a     Move cursor to beginning of line
 # ctrl-e     Move cursor to end of line
 # meta-b     Move cursor back one word
 # meta-f     Move cursor forward one word
 # ctrl-w     Cut the last word
-# ctrl-u     Cut everything before the cursor 
+# ctrl-u     Cut everything before the cursor
 # ctrl-k     Cut everything after the cursor
 # ctrl-y     Paste the last thing to be cut
 # ctrl-_     Undo
 
-set -o vi
+# set -o vi # uncomment this for vim mode
 #
 # h  Move cursor left
 # l  Move cursor right
 # A  Move cursor to end of line and put in insert mode
-# 0  (zero) Move cursor to beginning of line (doesn't put in insert mode) 
+# 0  (zero) Move cursor to beginning of line (doesn't put in insert mode)
 # i  Put into insert mode at current position
 # a  Put into insert mode after current position
 # dd     Delete line (saved for pasting)
@@ -175,28 +150,44 @@ set -o vi
 # k  Move down through history commands
 # u  Undo
 
-alias du='du -kh'       # Makes a more readable output.
+
+#----------------------------------------------------------------------
+# Personal Alias
+#----------------------------------------------------------------------
+
+alias du='du -kh'              # Makes a more readable output.
+alias mkdir='mkdir -p'
+alias ls='ls --color=auto'
+alias grep='egrep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias now='date +\"%Y%m%d.%H%M%S\"'
+alias today='date +\"%Y%m%d\"'
+alias h='history'
+alias pjson='python -mjson.tool'
 
 
 #----------------------------------------------------------------------
 # Screen
 #----------------------------------------------------------------------
 
-if [ -z "$STY" ]; then
-    exec screen -dR
-fi
+#if [ -z "$STY" ]; then
+    #exec screen -dR
+#fi
 
 
 #----------------------------------------------------------------------
-# Git
+# Git Global Config
 #----------------------------------------------------------------------
 
 # https://github.com/trufa/git-cheatsheet
 # http://ndpsoftware.com/git-cheatsheet.html
 
 git config --global color.ui true
-git config alias.lg 'log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit --decorate --graph --all'
+git config --global push.default current ## Change to simple when git is upgraded
+git config --global alias.lg "log --abbrev-commit --decorate --graph --all --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(cyan)<%an>%C(reset)'"
 git config --global diff.tool vimdiff
 git config --global difftool.prompt false
-git config --global alias.d difftool
 
